@@ -20,6 +20,9 @@ RUN ["/bin/opm", "serve", "/configs", "--cache-dir=/tmp/cache", "--cache-only"]
 # The base image is expected to contain /bin/opm (with serve subcommand) and /bin/grpc_health_probe
 FROM ${OPM_IMAGE}
 
+ARG INPUT_DIR
+COPY ./${INPUT_DIR}/ /configs/volsync-product
+
 COPY --from=builder /configs /configs
 COPY --from=builder /tmp/cache /tmp/cache
 
